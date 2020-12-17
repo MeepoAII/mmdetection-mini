@@ -48,6 +48,7 @@ def create_model(cfg, use_gpu=True):
 
 def create_featuremap_vis(cfg, use_gpu=True, init_shape=(320, 320, 3)):
     model = create_model(cfg, use_gpu)
+    # why partial
     model.forward = partial(forward, model)
     featurevis = FeatureMapVis(model, use_gpu)
     featurevis.set_hook_style(init_shape[2], init_shape[:2])

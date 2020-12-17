@@ -54,22 +54,22 @@ def main():
     cfg = retrieve_data_cfg(args.config, args.skip_type)
     print(cfg)
 
-    # dataset = build_dataset(cfg.data.train)
-    #
-    # progress_bar = cv_core.ProgressBar(len(dataset))
-    # for item in dataset:
-    #     filename = os.path.join(args.output_dir,
-    #                             Path(item['filename']).name
-    #                             ) if args.output_dir is not None else None
-    #     cv_core.imshow_det_bboxes(
-    #         item['img'],
-    #         item['gt_bboxes'],
-    #         item['gt_labels'],
-    #         class_names=dataset.CLASSES,
-    #         show=not args.not_show,
-    #         out_file=filename,
-    #         wait_time=args.show_interval)
-    #     progress_bar.update()
+    dataset = build_dataset(cfg.data.train)
+
+    progress_bar = cv_core.ProgressBar(len(dataset))
+    for item in dataset:
+        filename = os.path.join(args.output_dir,
+                                Path(item['filename']).name
+                                ) if args.output_dir is not None else None
+        cv_core.imshow_det_bboxes(
+            item['img'],
+            item['gt_bboxes'],
+            item['gt_labels'],
+            class_names=dataset.CLASSES,
+            show=not args.not_show,
+            out_file=filename,
+            wait_time=args.show_interval)
+        progress_bar.update()
 
 
 if __name__ == '__main__':
